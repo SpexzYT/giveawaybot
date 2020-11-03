@@ -1,18 +1,16 @@
 const { Client, MessageEmbed, Collection } = require ('discord.js')
 const fs = require('fs')
-const prefix = ">"
-const memberAdd = require('./Events/guildMemberAdd');
-const memberRemove = require('./Events/guildMemberRemove');
+const prefix = "g!"
 const Enmap = require('enmap');
 const Discord = require('discord.js');
 const request = require('request-promise');
 const cheerio = require('cheerio');
-class Lynx extends Client {
+class GA extends Client {
     constructor() {
         super();
         this.discord = require('discord.js')
         this.commands = new Collection();
-        this.db = new Enmap({ name: "LynxDB" });
+        this.db = new Enmap({ name: "GADB" });
     }
     
 
@@ -29,7 +27,7 @@ class Lynx extends Client {
         this.commandHandler();
         this.on('ready', () => console.log("Ready!"))
         this.on('message', async(message) => {
-            let prefix = this.db.get(`${message.guild.id}-prefix`) || ">";
+            let prefix = this.db.get(`${message.guild.id}-prefix`) || "g!";
             if(message.author.bot || !message.guild || !message.content.startsWith(prefix)) return;
             const args = message.content.slice(prefix.length).trim().split(/ +/g);
             const cmd = args.shift().toLowerCase();
@@ -37,12 +35,6 @@ class Lynx extends Client {
             if(!command) return;
             return command.run(this, message, args).catch(console.error)
             
-        })
-        this.on('guildMemberAdd', async(member) => {
-            memberAdd(this, member);
-        })
-        this.on('guildMemberRemove', async(member) => {
-            memberRemove(this, member);
         })
 this.login(token);
         this.snipes = new Map() // whatever you define your client as
@@ -58,4 +50,4 @@ this.login(token);
     }
 }
 
-module.exports = Lynx;
+module.exports = GA;

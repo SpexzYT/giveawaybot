@@ -13,13 +13,13 @@ module.exports = {
       !args[0].endsWith("m")
     )
       return message.channel.send(
-        `You did not use the correct formatting for the time!`
+        `You Did Not Insert A Time Or You did not use the correct formatting for the time!`
       );
     if (isNaN(args[0][0])) return message.channel.send(`That is not a number!`);
     let channel = message.mentions.channels.first();
     if (!channel)
       return message.channel.send(
-        `I could not find that channel in the guild!`
+        `I could not find that channel in the guild, Or There Were No Channels Mentioned!`
       );
     let prize = args.slice(2).join(" ");
     if (!prize) return message.channel.send(`No prize specified!`);

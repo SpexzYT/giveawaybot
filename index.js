@@ -1,2 +1,2 @@
-const Lynx = require('./Handlers/Client');
-new Lynx().start(require('./config.json').token);
+const GA = require('./Handlers/Client');
+new GA().start(require('./config.json').token);
